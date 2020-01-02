@@ -42,7 +42,7 @@ $_SESSION['billets'] = $_GET['billets'];
     <?php
      $req->closeCursor();
     // affiche les commentaires liés au billet selectionné
-    $com = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, "%d/%m/%Y à %Hh%imin%ss") AS date_com FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire');
+    $com = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, "%d/%m/%Y à %Hh%imin%ss") AS date_com FROM commentaires WHERE id_billet = ? ORDER BY date_commentaire DESC LIMIT 0, 5');
     $com->execute(array($_GET['billets']));
     while($essaie = $com->fetch()){
         ?>
