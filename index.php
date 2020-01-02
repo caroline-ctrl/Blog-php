@@ -32,8 +32,19 @@
     $req->closeCursor();
     ?>
 
-    <h3></h3>
+    <h2>Accès administrateur</h2>
+    <form action="admin.php" method="post">
+        <label for="pass">Mot de passe : </label>
+        <input id="motPasse" type="password" name="password">
+        <span id="but">voir</span><br><br>
+        <input type="submit">
+    </form>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
