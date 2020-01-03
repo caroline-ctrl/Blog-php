@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <title>Billets</title>
 </head>
 
@@ -18,9 +21,16 @@
     // connection à la bdd
     include 'connection.php';
 
+    //Récupère la page via une requête GET, s'il n'existe pas par défaut la page à 1
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+    // Nombre de billets a afficher sur chaque page
+    $records_per_page = 5;
+    // afficher les billets par le titre, la date et l'heure dans l'ordre descendant et limité a 5
+    $req = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM billets ORDER BY date_creation DESC LIMIT :current_page, :record_per_page');
+    $req->bindValue(':current_page', ($page - 1) * $records_per_page, PDO::PARAM_INT);
+    $req->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
+    $req->execute();
 
-    // afficher le titre, la date et l'heure dans l'ordre descendant et limité a 5
-    $req = $bdd->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM billets ORDER BY date_creation DESC LIMIT 0, 5');
     while ($donnees = $req->fetch()) {
     ?>
         <div class="news">
@@ -30,17 +40,34 @@
     <?php
     }
     $req->closeCursor();
+
+    // permet d'obtenir le nombre total de billets
+    $num_contacts = $bdd->query('SELECT COUNT(*) FROM billets')->fetchColumn();
     ?>
+
+
+        <div class="pagination">
+            <?php if ($page > 1) : ?>
+                <a href="index.php?page=<?= $page - 1 ?>"><i class="fas fa-angle-double-left fa-sm"></i></a>
+            <?php endif; ?>
+            <?php if ($page * $records_per_page < $num_contacts) : ?>
+                <a href="index.php?page=<?= $page + 1 ?>"><i class="fas fa-angle-double-right fa-sm"></i></a>
+            <?php endif; ?>
+        </div>
+
+
+
+
 
     <h2>Accès administrateur</h2>
     <form action="admin.php" method="post">
         <label for="pass">Mot de passe : </label>
         <input id="motPasse" type="password" name="password">
-        <span id="but">voir</span><br><br>
-        <input type="submit">
+        <span id="but"> VOIR </span><br>
+        <input type="submit"><br>
     </form>
 
-    
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
