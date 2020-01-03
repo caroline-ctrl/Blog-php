@@ -16,7 +16,7 @@
 include '../connection.php';
 ?><a href="../index.php">Retour à la liste des billets</a><br><br><?php
 
-if((isset($_POST['password']) AND $_POST['password'] == '0') AND (isset($_POST['login']) AND $_POST['login'] == '0')){
+if((isset($_POST['password']) AND $_POST['password'] == 'Tigrou') AND (isset($_POST['login']) AND $_POST['login'] == 'CaroD34*')){
     ?>
 
     <!-- pour ajouter un billet -->

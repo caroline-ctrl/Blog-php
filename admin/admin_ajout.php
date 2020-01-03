@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<a href="admin.php">Retour page admin</a>
+<a href="../index.php">Retour à la page d'accueil</a>
 <?php
 include '../connection.php';
 ?>

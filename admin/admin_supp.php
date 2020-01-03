@@ -10,7 +10,7 @@
 </head>
 <body>
     <p>La suppression du billet a été réalisé avec succès !</p>
-<a href="admin.php">Retour à la page admin</a>
+<a href="../index.php">Retour à la page d'accueil</a>
 <?php
 include '../connection.php';
 
