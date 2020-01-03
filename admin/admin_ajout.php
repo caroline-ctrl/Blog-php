@@ -7,9 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-<a href="index.php">Retour à la liste des billets</a>
+<a href="admin.php">Retour page admin</a>
 <?php
-include 'connection.php';
+include '../connection.php';
+?>
+
+<!-- formulaire permettant d'ajouter un billet -->
+<form action="admin_ajout.php" method="post">
+    
+    <br><label for="titre">Titre</label>
+    <input type="text" name="titre"><br><br>
+
+    <label for="contenu">Contenu</label>
+    <textarea name="contenu"></textarea><br><br>
+
+    <input type="submit">
+</form>
+
+<?php
+
 
  //verif que le formulaire est bien rempli
  if (isset($_POST['titre']) AND isset($_POST['contenu']))
@@ -34,7 +50,7 @@ include 'connection.php';
      }
  }
  
- $req->closeCursor();
+
  ?>
 
     

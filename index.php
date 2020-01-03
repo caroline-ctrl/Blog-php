@@ -45,7 +45,7 @@
     $num_contacts = $bdd->query('SELECT COUNT(*) FROM billets')->fetchColumn();
     ?>
 
-
+<!-- petit simbole en bas pour tourner les pages de billet -->
         <div class="pagination">
             <?php if ($page > 1) : ?>
                 <a href="index.php?page=<?= $page - 1 ?>"><i class="fas fa-angle-double-left fa-sm"></i></a>
@@ -58,9 +58,11 @@
 
 
 
-
+<!-- pour se connecter en tant qu'admin -->
     <h2>Accès administrateur</h2>
-    <form action="admin.php" method="post">
+    <form action="admin/admin.php" method="post">
+    <label for="login">Identifiant : </label>
+        <input id="login" type="text" name="login"><br>
         <label for="pass">Mot de passe : </label>
         <input id="motPasse" type="password" name="password">
         <span id="but"> VOIR </span><br>
